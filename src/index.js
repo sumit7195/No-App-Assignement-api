@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 const port = 3001;
 
@@ -13,7 +14,16 @@ const port = 3001;
 
 const app = express();
 
+// set template engine
+
+app.set("view engine", "ejs");
+
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// static
+
+// app.use(express.static(path.join(__dirname, "public")));
 
 // start mongoose
 

@@ -14,10 +14,7 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
 
-    username: {
-      type: String,
-      required: true,
-    },
+   
 
     password: {
       type: String,
@@ -48,31 +45,22 @@ userSchema.pre("save", function (next) {
   }
 });
 
-
-
-
 // find by token
 
 userSchema.statics.findByToken = function (token, cb) {
-    var user = this;
-  
-    jwt.verify(token, process.env.JWT_SECRET, function (err, decode) {
-      user.findOne({ _id: decode, token: token }, function (err, user) {
-        if (err) return cb(err);
-        cb(null, user);
-      });
+  var user = this;
+
+  jwt.verify(token, process.env.JWT_SECRET, function (err, decode) {
+    user.findOne({ _id: decode, token: token }, function (err, user) {
+      if (err) return cb(err);
+      cb(null, user);
     });
-  };
-  
-
-
-
-
-
+  });
+};
 
 // compare passoword
 userSchema.methods.comparePassword = function (password, cb) {
-//   console.log("password", password);
+  //   console.log("password", password);
 
   bcrypt.compare(password, this.password, function (err, isMatch) {
     if (err) return cb(next);
@@ -92,7 +80,6 @@ userSchema.methods.generateToken = function (cb) {
     cb(null, user);
   });
 };
-
 
 // delete token
 

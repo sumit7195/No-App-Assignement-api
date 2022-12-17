@@ -1,10 +1,5 @@
 const UserModel = require("../models/userModel");
 
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const userModel = require("../models/userModel");
-const { generateUserToken } = require("../common/common");
-
 module.exports.AuthController = {
   async register(req, res) {
     // taking a user
@@ -50,7 +45,7 @@ module.exports.AuthController = {
 
           user.comparePassword(req.body.password, (err, isMatch) => {
             if (!isMatch)
-              return res.json({
+              return res.status(400).json({
                 isAuth: false,
                 message: "Passowrd is not correct!",
               });
@@ -62,6 +57,7 @@ module.exports.AuthController = {
                 isAuth: true,
                 id: user._id,
                 email: user.email,
+                token: user.token,
               });
             });
           });
