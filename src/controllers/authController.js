@@ -14,6 +14,9 @@ module.exports.AuthController = {
           console.log(err);
           return res.status(400).json({ success: false });
         }
+
+        delete doc.password;
+
         res.status(200).json({
           succes: true,
           user: doc,

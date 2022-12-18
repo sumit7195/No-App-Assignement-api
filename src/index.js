@@ -21,9 +21,7 @@ app.set("view engine", "ejs");
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// static
 
-// app.use(express.static(path.join(__dirname, "public")));
 
 // start mongoose
 
