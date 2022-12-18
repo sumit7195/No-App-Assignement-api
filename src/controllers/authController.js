@@ -41,7 +41,7 @@ module.exports.AuthController = {
       else {
         UserModel.findOne({ email: req.body.email }, function (err, user) {
           if (!user)
-            return res.json({
+            return res.status(400).json({
               isAuth: false,
               message: "You are not registered",
             });
